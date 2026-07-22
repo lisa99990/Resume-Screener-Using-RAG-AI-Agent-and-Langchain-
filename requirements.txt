@@ -1,8 +1,8 @@
 streamlit
 langchain
 langchain-community
+lagchain-openai
 faiss-cpu
 pypdf
 python-dotenv
-langchain-google-genai
-langchain-classic
+tiktoken
