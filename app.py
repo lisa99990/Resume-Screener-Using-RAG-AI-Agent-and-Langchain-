@@ -9,7 +9,7 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGener
 
 # load API key
 load_dotenv()
-st.title("GC Questionaire - Feasible for anyone applying Marriage based Green card with greencard holder spouse")
+st.title("GC Questionaire")
 @st.cache_resource
 def build_chain():
     #loads all docs from the docs folder and splits them into chunks of 1000 characters with an overlap of 150 characters
@@ -38,11 +38,15 @@ def build_chain():
 
 
 qa = build_chain()
-question=st.text_input("Ask anything about Greencard application")
+question=st.text_input("Ask anything about Greencard application: Feasible only for Marriage based Green card with greencard holder spouse")
 if st.button("Ask") and question:
-    result=qa.invoke({"query",question})
+    with st.spinner("Generating answer..."):
+        result = qa.invoke({"query": question})
+
     st.subheader("Answer")
     st.write(result['result'])
+
+   
     st.subheader("Source Documents")
     shown=set()
     for doc in result["source_documents"]:
